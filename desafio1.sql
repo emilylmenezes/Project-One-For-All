@@ -2,8 +2,10 @@ DROP DATABASE IF EXISTS SpotifyClone;
 
 CREATE DATABASE IF NOT EXISTS SpotifyClone;
 
+USE SpotifyClone;
+
 CREATE TABLE SpotifyClone.planos(
-  planos_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   planos VARCHAR(50) NOT NULL,
   value_plans DOUBLE NOT NULL
 )  engine = InnoDB;
@@ -16,15 +18,15 @@ VALUES
     ('pessoal', 6.99);
 
 CREATE TABLE SpotifyClone.usuarios(
+	id INT NOT NULL,
   user INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	usuarios VARCHAR(200) NOT NULL,
 	age INT NOT NULL,
-  planos_id INT NOT NULL,
   assinatura DATETIME NOT NULL,
-  FOREIGN KEY (planos_id) REFERENCES planos(planos_id)
+  FOREIGN KEY (id) REFERENCES planos(id)
 )  engine = InnoDB;
 
-INSERT INTO SpotifyClone.usuarios(usuarios, age, planos_id, assinatura)
+INSERT INTO SpotifyClone.usuarios(usuarios, age, id, assinatura)
 VALUES
   ('Barbara Liskov', 82, 1, '2019-10-20'),
   ('Robert Cecil Martin', 58, 1, '2017-01-06'),
@@ -71,8 +73,8 @@ VALUES
 	('I Put A Spell On You', 6, 2012);
 
 CREATE TABLE SpotifyClone.musica(
-  reproducao_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  id INT NOT NULL,
+	id INT NOT NULL,
+  reproducoes INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   musica VARCHAR(200) NOT NULL,
   tempo INT NOT NULL,
   FOREIGN KEY (id) REFERENCES album (id)
@@ -93,14 +95,14 @@ VALUES
 
 CREATE TABLE SpotifyClone.historico_reproducao(
     user INT NOT NULL,
-    reproducao_id INT NOT NULL,
+    reproducoes INT NOT NULL,
     reproducao DATETIME NOT NULL,
-    CONSTRAINT PRIMARY KEY(user, reproducao_id),
+    CONSTRAINT PRIMARY KEY(user, reproducoes),
     FOREIGN KEY (user) REFERENCES usuarios (user),
-    FOREIGN KEY (reproducao_id) REFERENCES musica(reproducao_id)
+    FOREIGN KEY (reproducoes) REFERENCES musica(reproducoes)
 ) engine = InnoDB;
     
-INSERT INTO SpotifyClone.historico_reproducao(user, reproducao_id, reproducao) 
+INSERT INTO SpotifyClone.historico_reproducao(user, reproducoes, reproducao) 
 VALUES
 	(1,	8,	"2022-02-28 10:45:55"),
 	(1,	2,	"2020-05-02 05:30:35"),
