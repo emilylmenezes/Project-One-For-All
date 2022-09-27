@@ -39,12 +39,12 @@ VALUES
 	('Judith Butler', 45, 4, '2020-05-13'),
 	('Jorge Amado', 58, 4, '2017-02-17');
 
-CREATE TABLE SpotifyClone.artistas(
-  seguindo_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  artistas VARCHAR(200) NOT NULL
+CREATE TABLE SpotifyClone.artista(
+  artista_increment INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  artista VARCHAR(200) NOT NULL
 )  engine = InnoDB;
 
-INSERT INTO SpotifyClone.artistas (artistas)
+INSERT INTO SpotifyClone.artista (artista)
 VALUES
 	('Beyoncé'),
 	('Queen'),
@@ -56,12 +56,12 @@ VALUES
 CREATE TABLE SpotifyClone.album(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   album VARCHAR(200) NOT NULL,
-  seguindo_id INT NOT NULL,
+  artista_increment INT NOT NULL,
   lancamento YEAR,
-  FOREIGN KEY (seguindo_id) REFERENCES artistas(seguindo_id)
+  FOREIGN KEY (artista_increment) REFERENCES artista(artista_increment)
 ) engine = InnoDB;
 
-INSERT INTO SpotifyClone.album (album, seguindo_id, lancamento)
+INSERT INTO SpotifyClone.album (album, artista_increment, lancamento)
 VALUES
 	('Renaissance', 1, 2022),
 	('Jazz', 2, 1978),
@@ -121,15 +121,15 @@ VALUES
 	(9,	9,	"2022-02-24 21:14:22"),
 	(10, 3,	"2015-12-13 08:30:22");
     
-CREATE TABLE SpotifyClone.seguindo_artistas(
-    seguindo_id INT NOT NULL,
+CREATE TABLE SpotifyClone.seguindo_artista(
+    artista_increment INT NOT NULL,
     user INT NOT NULL,
-    CONSTRAINT PRIMARY KEY(seguindo_id, user),
-    FOREIGN KEY (seguindo_id) REFERENCES artistas (seguindo_id),
+    CONSTRAINT PRIMARY KEY(artista_increment, user),
+    FOREIGN KEY (artista_increment) REFERENCES artista (artista_increment),
     FOREIGN KEY (user) REFERENCES usuarios (user)
 ) engine = InnoDB;
     
-INSERT INTO SpotifyClone.seguindo_artistas(seguindo_id, user)
+INSERT INTO SpotifyClone.seguindo_artista(artista_increment, user)
 VALUES
 	(1,	1),
 	(2,	1),
