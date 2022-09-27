@@ -121,7 +121,7 @@ VALUES
 	(9,	9,	"2022-02-24 21:14:22"),
 	(10, 3,	"2015-12-13 08:30:22");
     
-CREATE TABLE SpotifyClone.seguindo_artista(
+CREATE TABLE SpotifyClone.seguindo_artistas(
     artista_increment INT NOT NULL,
     user INT NOT NULL,
     CONSTRAINT PRIMARY KEY(artista_increment, user),
@@ -129,7 +129,7 @@ CREATE TABLE SpotifyClone.seguindo_artista(
     FOREIGN KEY (user) REFERENCES usuarios (user)
 ) engine = InnoDB;
     
-INSERT INTO SpotifyClone.seguindo_artista(artista_increment, user)
+INSERT INTO SpotifyClone.seguindo_artistas(artista_increment, user)
 VALUES
 	(1,	1),
 	(2,	1),
