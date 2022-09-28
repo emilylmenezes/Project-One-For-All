@@ -74,7 +74,7 @@ VALUES
 
 CREATE TABLE SpotifyClone.musica(
 	id INT NOT NULL,
-  reproducoes INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  reproducoes_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   musica VARCHAR(200) NOT NULL,
   tempo INT NOT NULL,
   FOREIGN KEY (id) REFERENCES album (id)
@@ -95,14 +95,14 @@ VALUES
 
 CREATE TABLE SpotifyClone.historico_reproducao(
     user INT NOT NULL,
-    reproducoes INT NOT NULL,
+    reproducoes_id INT NOT NULL,
     reproducao DATETIME NOT NULL,
-    CONSTRAINT PRIMARY KEY(user, reproducoes),
+    CONSTRAINT PRIMARY KEY(user, reproducoes_id),
     FOREIGN KEY (user) REFERENCES usuarios (user),
-    FOREIGN KEY (reproducoes) REFERENCES musica(reproducoes)
+    FOREIGN KEY (reproducoes_id) REFERENCES musica(reproducoes_id)
 ) engine = InnoDB;
     
-INSERT INTO SpotifyClone.historico_reproducao(user, reproducoes, reproducao) 
+INSERT INTO SpotifyClone.historico_reproducao(user, reproducoes_id, reproducao) 
 VALUES
 	(1,	8,	"2022-02-28 10:45:55"),
 	(1,	2,	"2020-05-02 05:30:35"),
